@@ -3,10 +3,15 @@
 Console app to transcribe an audio file to text using OpenAI's gpt-4o-transcribe model
 
 Usage:
-  python3 transcribe.py <input_audio> [-o OUTPUT_FILE]
+  python3 transcribe-audio.py <input_audio> [-o OUTPUT_FILE] [-l LANGUAGE] [-p PROMPT]
 
-If -o/--output is not provided, the script writes the transcript to:
-  transcript_<original_file_name>.txt
+Arguments:
+  <input_audio>           Path to the input audio file (e.g., .mp3, .wav, .ogg)
+
+Options:
+  -o, --output OUTPUT     Path to the output text file. If not provided, saves as transcript_<original_file_name>.txt
+  -l, --language LANGUAGE The language of the input audio in ISO-639-1 format (e.g. en, es, fr). Optional.
+  -p, --prompt PROMPT     Optional text to guide the model's style or continue a previous audio segment. Must be in the language of the input audio / language argument. Optional.
 
 Requires:
   uv add openai python-dotenv
@@ -18,6 +23,7 @@ import sys
 import argparse
 from dotenv import load_dotenv
 from openai import OpenAI
+from typing import Optional
 
 
 
@@ -41,7 +47,7 @@ else:
 
 
 
-def transcribe_audio(input_path: str, language: str = None, prompt: str = None) -> str:
+def transcribe_audio(input_path: str, language: Optional[str] = None, prompt: Optional[str] = None) -> str:
     """
     Transcribe the given audio file using OpenAI's gpt-4o-transcribe model.
     Returns the transcribed text.
