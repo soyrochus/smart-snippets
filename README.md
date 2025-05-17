@@ -33,7 +33,7 @@ This project uses `uv` for dependency management with a `pyproject.toml`.
 
 ```bash
 
-git clone [https://github.com/your-org/smart-snippets.git](https://github.com/your-org/smart-snippets.git)
+git clone https://github.com/soyrochus/smart-snippets.git
 cd smart-snippets
 
 ```
@@ -43,6 +43,7 @@ cd smart-snippets
 ```bash
    uv sync
 ```
+For uv see https://docs.astral.sh/uv/
 
 This will read the `pyproject.toml` and install all required packages.
 
@@ -52,18 +53,19 @@ This will read the `pyproject.toml` and install all required packages.
 
 ```dotenv
 
-OPENAI\_API\_KEY=your\_key\_here
+OPENAI_API_KEY=your_key_here
 
 ```
 
 2. Alternatively, set the `OPENAI_API_KEY` environment variable:
   
 ```bash
-export OPENAI_API_KEY=your_key_here
+export OPENAI_API_KEY=[your_key_here]
 
 ```
 
 ## License and Copyright
 
-Copyright (c) 2023, Iwan van der Kleijn
+Copyright (c) 2025, Iwan van der Kleijn
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

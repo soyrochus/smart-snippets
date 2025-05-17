@@ -9,7 +9,7 @@ If -o/--output is not provided, the script writes the transcript to:
   transcript_<original_file_name>.txt
 
 Requires:
-  pip install openai python-dotenv
+  uv add openai python-dotenv
 
 The OpenAI API key is read from a .env file or the OPENAI_API_KEY environment variable.
 """
@@ -41,7 +41,7 @@ else:
 
 
 
-def transcribe_audio(input_path: str) -> str:
+def transcribe_audio(input_path: str, language: str = None, prompt: str = None) -> str:
     """
     Transcribe the given audio file using OpenAI's gpt-4o-transcribe model.
     Returns the transcribed text.
@@ -50,6 +50,15 @@ def transcribe_audio(input_path: str) -> str:
         with open(input_path, "rb") as audio_file:
             response =  client.audio.transcriptions.create(model="gpt-4o-transcribe",
             file=audio_file)
+            
+        with open(input_path, "rb") as audio_file:
+            # Only include language/prompt if provided (kwargs pattern)
+            kwargs = {"model": "gpt-4o-transcribe", "file": audio_file}
+            if language:
+                kwargs["language"] = language
+            if prompt:
+                kwargs["prompt"] = prompt
+            response = client.audio.transcriptions.create(**kwargs)    
     except Exception as e:
         print(f"Error during transcription: {e}", file=sys.stderr)
         sys.exit(1)
@@ -68,8 +77,18 @@ def main():
         "input", help="Path to the input audio file (e.g., .mp3, .wav, .ogg)"
     )
     parser.add_argument(
-        "-o", "--output", help="Path to the output text file"
+        "-o", "--output", 
+        help="Path to the output text file"
     )
+    parser.add_argument(
+        "-l", "--language",
+        help="The language of the input audio in ISO-639-1 format (e.g. en, es, fr). Optional."
+    )
+    parser.add_argument(
+        "-p", "--prompt",
+        help="Optional text to guide the model's style or continue a previous audio segment. Must be in the language of the input audio / language argument. Optional."
+    )
+
     args = parser.parse_args()
 
     api_key = get_api_key()
@@ -80,7 +99,7 @@ def main():
         )
         sys.exit(1)
 
-    transcript = transcribe_audio(args.input)
+    transcript = transcribe_audio(args.input, language=args.language, prompt=args.prompt)
 
     if args.output:
         try:
