@@ -52,28 +52,36 @@ def load_chat(path: str) -> List[Message]:
 
 
 def format_markdown(conv: Iterable[Message]) -> str:
-    """Return the conversation formatted as Markdown."""
+    """Return the conversation formatted as Markdown with clear delimiters."""
+    conv_list = list(conv)
     lines: List[str] = []
-    for speaker, text in conv:
+    for idx, (speaker, text) in enumerate(conv_list):
         lines.append(f"**{speaker}:**\n")
         lines.append(text.strip())
         lines.append("")
+        if speaker == "AI" and idx < len(conv_list) - 1:
+            lines.append("---")
+            lines.append("")
     return "\n".join(lines).strip()
 
 
 def format_ascii(conv: Iterable[Message]) -> None:
-    """Render the conversation to the terminal with colors using Rich."""
+    """Render the conversation to the terminal with rich colors using Rich."""
     if Console and Markdown:
         console = Console()
-        for speaker, text in conv:
-            console.print(f"[bold]{speaker}:[/bold]")
+        conv_list = list(conv)
+        for idx, (speaker, text) in enumerate(conv_list):
+            style = "bold magenta" if speaker == "User" else "bold cyan"
+            console.print(f"{speaker}:", style=style)
             console.print(Markdown(text))
+            if speaker == "AI" and idx < len(conv_list) - 1:
+                console.rule()
     else:
         print(format_markdown(conv))
 
 
 def format_html(conv: Iterable[Message]) -> str:
-    """Return the conversation as HTML."""
+    """Return the conversation rendered as HTML."""
     md_text = format_markdown(conv)
     if md_lib is None:
         return "<pre>" + md_text + "</pre>"
