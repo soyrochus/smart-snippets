@@ -25,6 +25,22 @@ A simple console tool that:
 python3 transcribe_audio.py path/to/audio.mp3 [-o path/to/output.txt]
 ```
 
+### `chat-peek`
+
+A CLI tool for inspecting exported chat logs from GitHub Copilot Chat.
+
+**Usage:**
+
+```bash
+chat-peek session.json
+chat-peek -a session.json
+chat-peek -h session.json > out.html
+```
+
+`chat-peek` works with the base dependencies of this project. For colored
+terminal output or HTML rendering, install the optional packages `rich` and
+`markdown`.
+
 ## Installation
 
 This project uses `uv` for dependency management with a `pyproject.toml`.
