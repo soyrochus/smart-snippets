@@ -11,6 +11,8 @@ A collection of useful, standalone Python scripts demonstrating features of the 
 See: [Karpathy’s explanation](https://twitter.com/karpathy/status/1777379411841005646) (Twitter/X, 2024).
 
 
+Beyond demonstrating what the API can do, the project highlights the idea of *vibecoding*: combining multiple AI assistants to maintain coding momentum. We use [Codex](https://platform.openai.com/docs/codex), ChatGPT and GitHub Copilot together to build these snippets quickly and creatively.
+
 ## Current Scripts
 
 ### `transcribe_audio.py`
@@ -42,9 +44,9 @@ chat-peek -a session.json
 chat-peek -h session.json > out.html
 ```
 
-`chat-peek` works with the base dependencies of this project. For colored
-terminal output or HTML rendering, install the optional packages `rich` and
-`markdown`.
+`chat-peek` relies on the packages `rich` and `markdown` for colourful console
+output and for converting markdown to HTML. These are included in the project
+dependencies and will be installed automatically.
 
 ## Installation
 
