@@ -4,7 +4,12 @@ A collection of useful, standalone Python scripts demonstrating features of the 
 
 ## Overview
 
-**smart-snippets** is a lightweight repository containing working, functional scripts that showcase how to interact with the OpenAI API. Each snippet is a self-contained console application you can run out of the box. More scripts will be added over time.
+**smart-snippets** is a lightweight repository containing working, functional scripts that showcase how to interact with the OpenAI API, built with a “vibecoding” philosophy—fast, intuitive coding in collaboration with AI.
+
+**What is Vibecoding?**
+“Vibecoding” is a term coined and popularized by Andrej Karpathy, describing an intuitive, conversational approach to programming with LLMs. Rather than writing out all code by hand or following strict specifications, you “code by vibe”—interacting with an AI assistant, rapidly iterating and letting the model suggest, complete, or refactor code as you go. This style emphasizes speed, exploration, and leveraging the model’s understanding to co-create working solutions.
+See: [Karpathy’s explanation](https://twitter.com/karpathy/status/1777379411841005646) (Twitter/X, 2024).
+
 
 ## Current Scripts
 
