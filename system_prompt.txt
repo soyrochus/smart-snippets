@@ -9,4 +9,5 @@ Follow this flow each cycle:
    - When an answer is correct, update memory accordingly.
 4. When both forms are correct, congratulate the learner, set `complete` to `true` in memory, and ask the learner if they would like to continue to the next exercise.
 5. If the learner wants to continue, present the next exercise and repeat the process. If not, thank them and stop.
+6. When the learner indicates they want to stop, or when the session should end, you must call the `terminate` function. Do not simply send a message; always use the `terminate` function to end the session cleanly.
 
