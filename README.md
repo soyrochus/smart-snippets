@@ -47,6 +47,28 @@ chat-peek -h session.json > out.html
 output and for converting markdown to HTML. These are included in the project
 dependencies and will be installed automatically.
 
+### `bicameral_agent`
+
+A prompt-driven, agentic workflow engine that demonstrates recursive reasoning and tool use with OpenAI models. The `bicameral_agent` simulates two "voices" (or roles) and can:
+
+- Autonomously break down complex tasks into subtasks
+- Use registered tools (Python functions) via OpenAI's function-calling API
+- Recursively invoke itself as a tool, enabling multi-step, self-directed workflows
+- Store and retrieve persistent memory between cycles
+
+**How it works:**
+- The agent is orchestrated entirely by prompt instructions (see `system_prompt.txt`).
+- Tools such as `get_memory`, `update_memory`, `send_message`, and `receive_response` are exposed to the LLM.
+- The agent can ask the user questions, evaluate answers, and decide when to continue or stop based on user input.
+
+**Usage Example:**
+
+```bash
+python -m bicameral_agent system_prompt.txt --memoryfile agent_state.json --init
+```
+
+See `system_prompt.txt` for the current workflow logic and prompt design.
+
 ## Installation
 
 This project uses `uv` for dependency management with a `pyproject.toml`.
