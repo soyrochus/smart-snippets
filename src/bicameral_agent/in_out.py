@@ -10,3 +10,4 @@ def send_message(text: str) -> None:
 def receive_response() -> str:
     """Return the next line of user input."""
     return input("> ")
+
