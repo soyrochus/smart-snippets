@@ -16,9 +16,10 @@ logger = logging.getLogger(__name__)
 
 
 
-def run_orchestrator(prompt_path: str, memoryfile: str = None, init: bool = False) -> None:
+def run_orchestrator(prompt_path: str, memoryfile: str = None, init: bool = False, debug: bool = False) -> None:
     """Run the bicameral agent using ``prompt_path`` as the system prompt."""
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+    log_level = logging.DEBUG if debug else logging.WARNING
+    logging.basicConfig(level=log_level, format="%(asctime)s - %(levelname)s - %(message)s")
 
     prompt = Path(prompt_path).read_text(encoding="utf-8")
     client = get_openai_client()
@@ -64,10 +65,11 @@ def run_orchestrator(prompt_path: str, memoryfile: str = None, init: bool = Fals
         {"role": "system", "content": prompt},
     ]
 
+    model_name = os.environ.get("OPENAI_MODEL_ID", "gpt-4o")
     while True:
         try:
             response = client.chat.completions.create(
-                model="gpt-4o", messages=messages, functions=functions, function_call="auto"
+                model=model_name, messages=messages, functions=functions, function_call="auto"
             )
         except OpenAIError as exc:
             logger.exception("OpenAI API call failed: %s", exc)
