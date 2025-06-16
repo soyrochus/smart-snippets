@@ -1,18 +1,17 @@
 
 In src/bicameral_agent you find  a "bicameral agent" agent in Python, following these requirements: The agent must autonomously break down complex tasks, decide when to use tools, and recursively invoke itself to solve subtasks, all orchestrated by prompt instructions. The information it will get from an externally defined prompt (in the test case coming from /system_prompt.txt)
 
-The current implementation has a incomplete working verion. 
+Provide answers to the following questions:
 
-Fully implement all the tool used in run_orchestrator so a full agentic workflow which can run continously until the stop condition. 
+1. The current implementation works with a potent model. WIth lesser it seems to break (interrupting the loop in orchestrator)
+Give me hypothesis why this is the case
+
+2. It would seem that the current implementation is fragile. What are options to make it more robbust?
+
+3. Would changing the orchestrator to a LangGraph implementation have any benefits?
+
+4. Although called "Bicameral", there is not real distinction between "god voice" and "execution". What would a "real" implementatiojn look like? Woudl that strengthen the mechanism? ( I would imagine at the cost of more calls to the LLM)
 
 
-Implement in system_prompt.txt a simple english language excsersise:
-
-You are a concise English-grammar coach. 
-1️⃣ Show the base sentence, 
-2️⃣ ask learner for negative & question forms, 
-3️⃣ evaluate accuracy, 
-4️⃣ give one-line explanation if wrong, 5️⃣ stop after both are correct.
-
-Change the prompt where needed to have the agent follow the flow completely autonously, interacting with the userr.
+Do NOT change any code. GIve me answers to the questions, please. 
 

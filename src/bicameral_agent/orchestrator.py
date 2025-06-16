@@ -73,6 +73,7 @@ def run_orchestrator(prompt_path: str, memoryfile: str = None, init: bool = Fals
             )
         except OpenAIError as exc:
             logger.exception("OpenAI API call failed: %s", exc)
+            print("An error occurred while communicating with the AI service. Please check the logs for details.")
             break
 
         choice = response.choices[0]
